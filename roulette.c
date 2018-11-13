@@ -9,7 +9,7 @@ int money, bet;
 
 //randomNumber generator function
 int randomNumber ()
-{   
+{
     int timer = 0;
     while (timer < 4){
         printf(".\n");
@@ -19,7 +19,6 @@ int randomNumber ()
     srand (time (0));
     int num = (rand () % (36 - 0 + 1)) + 0;
     printf("%d\n", num);
-num = 0;
     return num;
 }
 
@@ -30,13 +29,14 @@ void amount ()
     printf ("Bet = %d\n", bet);
 }
 
+//choose the difficulty
 int difficultyChoice()
 {
     int selection, moneyback;
     printf("Choose difficulty\n");
-    printf("1 - Easy (Minimum bet 1 of euro)\n");
-    printf("2 - Normal (Minimum bet of 10 euros)\n");
-    printf("3 - Hard (Minimum bet of 20 euro)\n");
+    printf("1 - Easy (Minimum bet 1 euro)\n");
+    printf("2 - Normal (Minimum bet 10 euros)\n");
+    printf("3 - Hard (Minimum bet 20 euro)\n");
     while (selection < 1 || selection > 3){    
         scanf("%d", &selection);
         if (selection == 1){
@@ -49,7 +49,7 @@ int difficultyChoice()
             moneyback = 20;
         }
         else{
-            printf("That's not the right amount.\n");
+            printf("Put correct number\n");
         }
     }
     return moneyback;
@@ -68,7 +68,7 @@ void MainMenu ()
     printf ("s - show balace\n");
     printf ("c - cashout and go home\n");
 }
- 
+
 int main ()
 {
     money = 100;
@@ -86,7 +86,7 @@ int main ()
             printf ("How much do you want to bet?\n");
             scanf ("%d", &bet);
             if (bet > money || bet < difficulty){
-                printf ("Wrong amount of money\n");
+                printf ("That's not a valid amount\n");
             }
             else {
 	            printf ("Your bet is %d euros\n", bet);
@@ -94,42 +94,42 @@ int main ()
         }
         //Player choses "n"
         else if (input == 'n'){
-	        printf ("Choose number between 0 and 36\n");
+	        printf ("Choose a number between 0 and 36\n");
 	        scanf ("%d", &numb);
 	        choice = 1;
 	        if (numb < 0 || numb > 36){
-	            printf ("I said between 0 and 36\n");
+	            printf ("I said between 0 and 36!\n");
 	            choice = 0;
 	        }
 	    }
 
         //Player choses "e"
         else if (input == 'e'){
-	        printf ("We're even.\n");
+	        printf ("we're even!\n");
 	        choice = 2;
         }
 
         //Player choses "o"
         else if (input == 'o'){
-	        printf ("That's an odd bet.\n");
+	        printf ("That is an odd bet!\n");
 	        choice = 3;
         }
 
         //Player choses "r"
         else if (input == 'r' && bet == 0){
-	        printf ("Hey! Money first!!!\n");
+	        printf ("Place a bet!!!\n");
 	    }
         else if (input == 'r' && bet != 0){
 	        if (choice == 1){
 	            int num = randomNumber ();
 	            if (numb == num && num != 0){
-                    printf ("Bring the fireworks. You Won!!!\n");
+                    printf ("Brig out the fireworks. You won!\n");
                     money = money + (bet * 35);
                     bet = 0;
                     choice = 0;
 	            }
                 else{
-                    printf ("Time to go home and cry, or lose more. You lost!!!\n");
+                    printf ("Time to go home and cry, or lose more. You lost!\n");
                     money = money - bet;
                     bet = 0;
                     choice = 0;
@@ -138,13 +138,13 @@ int main ()
             else if (choice == 2){
                 int num = randomNumber ();
                 if (num % 2 == 0 && num != 0){
-                    printf ("Bring the fireworks. You Won!!!\n");
-                    money = money + (bet * 2);
+                    printf ("You won!\n");
+                    money = money + (bet * 2)
                     bet = 0;
                     choice = 0;
                 }
                 else{
-                    printf ("Time to go home and cry, or lose more. You lost!!!\n");
+                    printf ("You lost!\n");
                     money = money - bet;
                     bet = 0;
                     choice = 0;
@@ -153,20 +153,20 @@ int main ()
     	    else if (choice == 3){
     	        int num = randomNumber ();
     	        if (num % 2 == 1 && num != 0){
-    	            printf ("Bring the fireworks. You Won!!!\n");
+    	            printf ("You won!\n");
     	            money = money + (bet * 2);
     	            bet = 0;
     	            choice = 0;
     	        }
                 else{
-    	            printf ("Time to go home and cry, or lose more. You lost!!!\n");
+    	            printf ("You lost!\n");
     	            money = money - bet;
     	            bet = 0;
     	            choice = 0;
                 }
             }
             else if (choice == 0){
-                printf("You didn't tell me what do you want to bet on.");
+                printf("Choose the bet");
             }
 	    }
         else if (input == 'h'){
@@ -176,20 +176,20 @@ int main ()
 	        amount ();
         }
         else if (input == 'c'){
-            printf("You got out with %d euros! impressive!!!\n", money);
+            printf("You won %d euros! Congratulations!!\n", money);
         }
         else{
-            printf ("Choose a valid option.\n");
+            printf ("Put a correct letter\n");
         }
     }
     if (money == 0){
-        printf("You're broke, don't worry, we won't tell your wife!\n");
+        printf("You don't have money!\n");
     }
     else if (money < difficulty){
-        printf("You're too poor to bet on anything!\n");
+        printf("You don't have enough money to place a bet!\n");
         
     }
-    printf("FIN\n");
+    printf("Game over\n");
     return 0;
 }
 
